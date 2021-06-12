@@ -1,4 +1,31 @@
+import axios from 'axios';
 const Card = (article) => {
+  const card = document.createElement('div');
+  const headline = document.createElement('div');
+  const author = document.createElement('div');
+  const imageContainer = document.createElement('div');
+  const authorPhoto = document.createElement('img');
+  const authorName = document.createElement('span');
+  card.classList.add('card');
+  headline.classList.add('headline');
+  author.classList.add('author');
+  imageContainer.classList.add('img-container');
+  imageContainer.appendChild(authorPhoto);
+  author.appendChild(imageContainer);
+  author.appendChild(authorName);
+  card.appendChild(headline)
+  card.appendChild(author)
+  headline.textContent = article.headline;
+  authorPhoto.src = article.authorPhoto;
+  authorName.textContent = article.authorName;
+  card.addEventListener('click', () => {
+    console.log(article.headline)
+  })
+
+
+
+
+
   // TASK 5
   // ---------------------
   // Implement this function, which should return the markup you see below.
@@ -17,9 +44,31 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
+
+  return card
 }
 
+
+
 const cardAppender = (selector) => {
+  const entryPoint = document.querySelector(selector);
+  axios.get(`https://lambda-times-api.herokuapp.com/articles`)
+    .then((res) => {
+      const response = res.data.articles
+      const bootstrap = res.data.articles.bootstrap
+      const javascript = res.data.articles.javascript
+      const jquery = res.data.articles.jquery
+      const node = res.data.articles.node
+      const technology = res.data.articles.technology
+      for (let x = 0; x < 4; x++) {
+        entryPoint.appendChild(Card(bootstrap[x]))
+        entryPoint.appendChild(Card(javascript[x]))
+        entryPoint.appendChild(Card(jquery[x]))
+        entryPoint.appendChild(Card(node[x]))
+        entryPoint.appendChild(Card(technology[x]))
+      }
+    })
+    .catch(err => console.log(err))
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
@@ -29,5 +78,5 @@ const cardAppender = (selector) => {
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
 }
-const test = 'testing'
+
 export { Card, cardAppender }
