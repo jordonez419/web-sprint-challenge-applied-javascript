@@ -26,13 +26,10 @@ const Tabs = (topics) => {
   return topicsContainer
 }
 
-console.log(Tabs(['javascript', 'bootstrap', 'technology']))
-
 const tabsAppender = (selector) => {
   const entryPoint = document.querySelector(selector);
   axios.get(`https://lambda-times-api.herokuapp.com/topics`)
     .then((res) => {
-      console.log(res.data.topics)
       const appending = Tabs(res.data.topics);
       entryPoint.appendChild(appending)
     })

@@ -54,7 +54,6 @@ const cardAppender = (selector) => {
   const entryPoint = document.querySelector(selector);
   axios.get(`https://lambda-times-api.herokuapp.com/articles`)
     .then((res) => {
-      const response = res.data.articles
       const bootstrap = res.data.articles.bootstrap
       const javascript = res.data.articles.javascript
       const jquery = res.data.articles.jquery
