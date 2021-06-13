@@ -1,4 +1,10 @@
 import axios from 'axios';
+import Card from './card'
+import cardAppender from './card'
+
+// cardAppender('.cards-container')
+
+
 
 const Tabs = (topics) => {
   const topicsContainer = document.createElement('div')

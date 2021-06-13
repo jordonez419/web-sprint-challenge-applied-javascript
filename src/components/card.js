@@ -49,22 +49,24 @@ const Card = (article) => {
 }
 
 
-
 const cardAppender = (selector) => {
   const entryPoint = document.querySelector(selector);
   axios.get(`https://lambda-times-api.herokuapp.com/articles`)
     .then((res) => {
-      const bootstrap = res.data.articles.bootstrap
+      console.log(res)
+      const technology = res.data.articles.technology
       const javascript = res.data.articles.javascript
+      const bootstrap = res.data.articles.bootstrap
       const jquery = res.data.articles.jquery
       const node = res.data.articles.node
-      const technology = res.data.articles.technology
+      entryPoint.appendChild(Card(javascript[3]))
       for (let x = 0; x < 4; x++) {
-        entryPoint.appendChild(Card(bootstrap[x]))
+        console.log(x)
+        entryPoint.appendChild(Card(technology[x]))
         entryPoint.appendChild(Card(javascript[x]))
+        entryPoint.appendChild(Card(bootstrap[x]))
         entryPoint.appendChild(Card(jquery[x]))
         entryPoint.appendChild(Card(node[x]))
-        entryPoint.appendChild(Card(technology[x]))
       }
     })
     .catch(err => console.log(err))
